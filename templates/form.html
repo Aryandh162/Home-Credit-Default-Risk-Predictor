@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Credit Risk Predictor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9fafb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      max-width: 700px;
+      margin-top: 60px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .feature-input {
+      margin-bottom: 15px;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0069d9;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center mb-4">🏦 Home Credit Default Risk Predictor</h2>
+
+    {% if error_msg %}
+      <div class="alert alert-danger text-center">{{ error_msg }}</div>
+    {% endif %}
+
+    <form method="POST" action="/">
+      {% for feature in top_features %}
+      <div class="feature-input">
+        <label class="form-label">{{ feature.replace('_', ' ') }}</label>
+        <input type="number" step="any" name="{{ feature }}" class="form-control" placeholder="Enter value for {{ feature }}" required>
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary w-100 mt-3">Predict</button>
+    </form>
+
+    {% if prediction is not none %}
+    <div class="result alert 
+      {% if prediction == 1 %}alert-danger{% elif prediction == 0 %}alert-success{% else %}alert-warning{% endif %}">
+      <strong>Prediction:</strong>
+      {% if prediction == 1 %}
+        🚨 High risk of default
+      {% elif prediction == 0 %}
+        ✅ Low risk of default
+      {% else %}
+        ⚠️ {{ prediction }}
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-3">
+      <a href="/batch_predict" class="btn btn-outline-secondary">Batch Prediction</a>
+    </div>
+  </div>
+</body>
+</html>
