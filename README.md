@@ -2,7 +2,7 @@
 💡 A Machine Learning Web App for Credit Risk Analysis
 
 This project predicts whether a loan applicant is likely to default or repay based on their financial, demographic, and credit history data.
-Built with Flask, scikit-learn, and pandas, it provides both real-time predictions and batch CSV uploads for large-scale credit risk assessment — wrapped in a modern interface.
+Built with Flask, scikit-learn, and pandas, It provides both real-time predictions and batch CSV uploads for large-scale credit risk assessment — wrapped in a modern interface.
 
 🚀 Features
 🧠 ML-powered predictions using trained classification models
